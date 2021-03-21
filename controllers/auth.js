@@ -51,7 +51,10 @@ exports.signup = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('expense_manager_user_token', 'Bearer ' + token);
+        res.cookie('expense_manager_user_token', 'Bearer ' + token, {
+            maxAge: 999999999999999,
+            httpOnly: true,
+        });
         return res.status(200).json({
             success: {
                 token,
@@ -109,7 +112,10 @@ exports.signin = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('expense_manager_user_token', 'Bearer ' + token);
+        res.cookie('expense_manager_user_token', 'Bearer ' + token, {
+            maxAge: 999999999999999,
+            httpOnly: true,
+        });
         return res.status(200).json({
             success: {
                 token,
