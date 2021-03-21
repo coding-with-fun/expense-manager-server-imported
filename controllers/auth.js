@@ -54,10 +54,12 @@ exports.signup = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('expense_manager_user_token', 'Bearer ' + token, {
+        const options = {
             maxAge: 999999999999999,
-            httpOnly: true,
-        });
+            secure: process.env.NODE_ENV === 'production',
+            httpOnly: process.env.NODE_ENV === 'production',
+        };
+        res.cookie('expense_manager_user_token', 'Bearer ' + token, options);
         return res.status(200).json({
             success: {
                 token,
@@ -118,10 +120,12 @@ exports.signin = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('expense_manager_user_token', 'Bearer ' + token, {
+        const options = {
             maxAge: 999999999999999,
-            httpOnly: true,
-        });
+            secure: process.env.NODE_ENV === 'production',
+            httpOnly: process.env.NODE_ENV === 'production',
+        };
+        res.cookie('expense_manager_user_token', 'Bearer ' + token, options);
         return res.status(200).json({
             success: {
                 token,
