@@ -46,19 +46,20 @@ const checks = {
         .withMessage('Date is required.')
         .custom((value) => {
             if (!moment(value).isValid()) {
-                throw new Error(
-                    'Password confirmation does not match password'
-                );
+                throw new Error('Please enter a valid date.');
             }
-
-            // Indicates the success of this synchronous custom validator
             return true;
-        })
-        .withMessage('Please enter a valid date.'),
+        }),
     checkCategory: check('category')
         .trim()
         .notEmpty()
-        .withMessage('Category is required.'),
+        .withMessage('Category is required.')
+        .custom((value) => {
+            if (!['income', 'expense'].includes(value)) {
+                throw new Error('Please enter a valid category.');
+            }
+            return true;
+        }),
 };
 
 /**
