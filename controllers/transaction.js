@@ -19,7 +19,6 @@ exports.addTransaction = async (req, res) => {
         const userID = req.auth;
 
         const newTransaction = new Transaction(req.body);
-        console.log('object', newTransaction);
         await newTransaction.save();
 
         await User.findByIdAndUpdate(userID, {

@@ -4,6 +4,7 @@
  */
 
 const { check, validationResult } = require('express-validator');
+const moment = require('moment');
 
 /**
  * @description Defining check conditions.
@@ -39,7 +40,21 @@ const checks = {
         .withMessage('Amount is required.')
         .isDecimal()
         .withMessage('Please enter a valid Amount.'),
-    checkDate: check('date').trim().notEmpty().withMessage('Date is required.'),
+    checkDate: check('date')
+        .trim()
+        .notEmpty()
+        .withMessage('Date is required.')
+        .custom((value) => {
+            if (!moment(value).isValid()) {
+                throw new Error(
+                    'Password confirmation does not match password'
+                );
+            }
+
+            // Indicates the success of this synchronous custom validator
+            return true;
+        })
+        .withMessage('Please enter a valid date.'),
     checkCategory: check('category')
         .trim()
         .notEmpty()
