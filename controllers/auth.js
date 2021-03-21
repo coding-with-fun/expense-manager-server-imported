@@ -51,7 +51,7 @@ exports.signup = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('mern-notes-app-user-token', token);
+        res.cookie('expense_manager_user_token', 'Bearer ' + token);
         return res.status(200).json({
             success: {
                 token,
@@ -109,7 +109,7 @@ exports.signin = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('mern-notes-app-user-token', token);
+        res.cookie('expense_manager_user_token', 'Bearer ' + token);
         return res.status(200).json({
             success: {
                 token,

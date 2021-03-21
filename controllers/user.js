@@ -21,7 +21,10 @@ exports.userDetails = async (req, res) => {
         const user = await User.findOne({
             _id: userID,
         })
-            .populate('todoList', '_id content isCompleted')
+            .populate(
+                'transactionList',
+                '_id title description category amount date'
+            )
             .select({ encryptedPassword: 0, salt: 0 });
 
         /**

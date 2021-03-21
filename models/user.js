@@ -32,17 +32,10 @@ const UserSchema = mongoose.Schema(
 
         salt: String,
 
-        todoList: [
+        transactionList: [
             {
                 type: ObjectId,
-                ref: 'ToDo',
-            },
-        ],
-
-        noteList: [
-            {
-                type: ObjectId,
-                ref: 'Note',
+                ref: 'Transaction',
             },
         ],
     },

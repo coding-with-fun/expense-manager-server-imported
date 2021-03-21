@@ -7,13 +7,13 @@ const express = require('express');
 
 const authRoutes = require('./auth');
 const userRoutes = require('./user');
-const todoRoutes = require('./todo');
+const transactionRoutes = require('./transaction');
 
 const app = express();
 const BASE_URL = '/api';
 
 app.use(BASE_URL + '/auth', authRoutes);
 app.use(BASE_URL + '/user', userRoutes);
-app.use(BASE_URL + '/todo', todoRoutes);
+app.use(BASE_URL + '/transaction', transactionRoutes);
 
 module.exports = app;

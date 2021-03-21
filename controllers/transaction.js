@@ -1,35 +1,34 @@
 /**
  * @author Coderc
- * @description ToDo controller.
+ * @description Transaction controller.
  */
 
 require('colors');
 
 const User = require('../models/user');
-const ToDo = require('../models/todo');
+const Transaction = require('../models/transaction');
 
 /**
  * @type        POST
- * @route       /api/todo/add
- * @description Add New ToDo controller.
+ * @route       /api/transaction/add
+ * @description Add New Transaction controller.
  * @access      Private
  */
-exports.addToDo = async (req, res) => {
+exports.addTransaction = async (req, res) => {
     try {
         const userID = req.auth;
 
-        const newToDo = new ToDo({
-            content: req.body.content,
-        });
-        await newToDo.save();
+        const newTransaction = new Transaction(req.body);
+        console.log('object', newTransaction);
+        await newTransaction.save();
 
         await User.findByIdAndUpdate(userID, {
-            $push: { todoList: newToDo._id },
+            $push: { transactionList: newTransaction._id },
         });
 
         return res.status(200).json({
             success: {
-                message: 'ToDo added successfully.',
+                message: 'Transaction added successfully.',
             },
         });
     } catch (error) {
@@ -44,17 +43,19 @@ exports.addToDo = async (req, res) => {
 
 /**
  * @type        DELETE
- * @route       /api/todo/delete/id:id
- * @description Delete ToDo controller.
+ * @route       /api/transaction/delete/id:id
+ * @description Delete Transaction controller.
  * @access      Private
  */
-exports.deleteToDo = async (req, res) => {
+exports.deleteTransaction = async (req, res) => {
     try {
         const userID = req.auth;
-        const todoID = req.query.id;
+        const transactionID = req.query.id;
 
-        const deletedToDo = await ToDo.findByIdAndDelete(todoID);
-        if (!deletedToDo) {
+        const deletedTransaction = await Transaction.findByIdAndDelete(
+            transactionID
+        );
+        if (!deletedTransaction) {
             return res.status(404).json({
                 error: {
                     message: 'Item is not present.',
@@ -62,12 +63,12 @@ exports.deleteToDo = async (req, res) => {
             });
         }
         await User.findByIdAndUpdate(userID, {
-            $pull: { todoList: todoID },
+            $pull: { transactionList: transactionID },
         });
 
         return res.status(200).json({
             success: {
-                message: 'ToDo deleted successfully.',
+                message: 'Transaction deleted successfully.',
             },
         });
     } catch (error) {
