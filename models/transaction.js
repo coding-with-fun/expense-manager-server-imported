@@ -1,6 +1,6 @@
 /**
  * @author Coderc
- * @description ToDo Model.
+ * @description Transaction Model.
  */
 
 const mongoose = require('mongoose');

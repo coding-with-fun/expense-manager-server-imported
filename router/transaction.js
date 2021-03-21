@@ -16,7 +16,7 @@ const router = express.Router();
 
 /**
  * @type        POST
- * @route       /api/todo/add
+ * @route       /api/transaction/add
  * @description Add New Transaction controller.
  * @access      Private
  */

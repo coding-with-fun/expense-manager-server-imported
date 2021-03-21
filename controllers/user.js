@@ -6,7 +6,6 @@
 require('colors');
 
 const User = require('../models/user');
-const ToDo = require('../models/todo');
 
 /**
  * @type        GET
@@ -72,7 +71,10 @@ exports.updateDetails = async (req, res) => {
             req.body,
             options
         )
-            .populate('todoList', '_id content isCompleted')
+            .populate(
+                'transactionList',
+                '_id title description category amount date'
+            )
             .select({ encryptedPassword: 0, salt: 0 });
 
         return res.status(200).json({

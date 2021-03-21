@@ -61,11 +61,6 @@ const signUpCheckReq = () => [
 const signInCheckReq = () => [checks.checkUserName, checks.checkPassword];
 
 /**
- * @description Defining ToDo check.
- */
-const todoCheckReq = () => [checks.checkContent];
-
-/**
  * @description Defining Transactions check.
  */
 const transactionsCheckReq = () => [
@@ -96,6 +91,5 @@ const returnErrors = (req, res, next) => {
 module.exports = userValidator = {
     validateSignUp: [signUpCheckReq(), returnErrors],
     validateSignIn: [signInCheckReq(), returnErrors],
-    validateToDo: [todoCheckReq(), returnErrors],
     validateTransaction: [transactionsCheckReq(), returnErrors],
 };
