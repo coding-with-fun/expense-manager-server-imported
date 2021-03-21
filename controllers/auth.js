@@ -35,9 +35,12 @@ exports.signup = async (req, res) => {
          * @description Create new user and save it.
          * @param Request Body
          */
-        const user = new User(req.body);
+        let user = new User(req.body);
         await user.save();
 
+        user = user.toJSON();
+        delete user.salt;
+        delete user.encryptedPassword;
         /**
          * @description Generate token using jsonwebtoken package.
          *              Set token to cookie.
@@ -59,11 +62,7 @@ exports.signup = async (req, res) => {
             success: {
                 token,
                 message: 'User created successfully.',
-                user: {
-                    id: user._id,
-                    name: user.name,
-                    userName: user.userName,
-                },
+                user: user,
             },
         });
     } catch (error) {
@@ -85,7 +84,10 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res) => {
     try {
         const { userName, password } = req.body;
-        const user = await User.findOne({ userName });
+        let user = await User.findOne({ userName }).populate(
+            'transactionList',
+            '_id title description category amount date'
+        );
 
         /**
          * @description Checks if user is present with provided username or
@@ -98,6 +100,10 @@ exports.signin = async (req, res) => {
                 },
             });
         }
+
+        user = user.toJSON();
+        delete user.salt;
+        delete user.encryptedPassword;
 
         /**
          * @description Generate token using jsonwebtoken package.
@@ -120,11 +126,7 @@ exports.signin = async (req, res) => {
             success: {
                 token,
                 message: 'User signed in successfully',
-                user: {
-                    id: user._id,
-                    name: user.name,
-                    userName: user.userName,
-                },
+                user: user,
             },
         });
     } catch (error) {
