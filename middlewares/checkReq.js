@@ -3,7 +3,7 @@
  * @description Request validation.
  */
 
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, oneOf } = require('express-validator');
 const moment = require('moment');
 
 /**
@@ -15,15 +15,29 @@ const checks = {
         .not()
         .trim()
         .isEmpty()
-        .withMessage('Name must be registered.'),
+        .withMessage('Name is required.'),
     checkUserName: check('userName')
         .trim()
         .isLength({ min: 5 })
         .withMessage('Username must be at least 5 characters long.'),
+    checkEmail: check('email')
+        .trim()
+        .isEmail()
+        .withMessage('Please enter a valid email.'),
     checkPassword: check('password')
         .trim()
         .isLength({ min: 5 })
         .withMessage('Password must be at least 5 characters long.'),
+    checkConfirmPassword: check('confirmPassword')
+        .trim()
+        .isLength({ min: 5 })
+        .withMessage('Confirm Password must be at least 5 characters long.')
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Passwords does not match.');
+            }
+            return true;
+        }),
 
     // For Transactions
     checkTitle: check('title')
@@ -45,7 +59,7 @@ const checks = {
         .notEmpty()
         .withMessage('Date is required.')
         .custom((value) => {
-            if (!moment(value).isValid()) {
+            if (!moment.unix(value).isValid() || value.length !== 10) {
                 throw new Error('Please enter a valid date.');
             }
             return true;
@@ -68,13 +82,18 @@ const checks = {
 const signUpCheckReq = () => [
     checks.checkName,
     checks.checkUserName,
+    checks.checkEmail,
     checks.checkPassword,
+    checks.checkConfirmPassword,
 ];
 
 /**
  * @description Defining SignIn check.
  */
-const signInCheckReq = () => [checks.checkUserName, checks.checkPassword];
+const signInCheckReq = () => [
+    oneOf([checks.checkUserName, checks.checkEmail]),
+    checks.checkPassword,
+];
 
 /**
  * @description Defining Transactions check.

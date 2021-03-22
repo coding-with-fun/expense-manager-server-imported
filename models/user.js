@@ -24,6 +24,13 @@ const UserSchema = mongoose.Schema(
             unique: true,
         },
 
+        email: {
+            type: String,
+            trim: true,
+            required: true,
+            unique: true,
+        },
+
         encryptedPassword: {
             type: String,
             trim: true,
@@ -39,7 +46,7 @@ const UserSchema = mongoose.Schema(
             },
         ],
     },
-    { timestamp: true }
+    { timestamps: true }
 );
 
 UserSchema.virtual('password')

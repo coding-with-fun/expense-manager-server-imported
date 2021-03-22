@@ -32,12 +32,12 @@ const TransactionSchema = mongoose.Schema(
         },
 
         date: {
-            type: String,
+            type: Number,
             trim: true,
             required: true,
         },
     },
-    { timestamp: true }
+    { timestamps: true }
 );
 
 module.exports = Transaction = mongoose.model('Transaction', TransactionSchema);
