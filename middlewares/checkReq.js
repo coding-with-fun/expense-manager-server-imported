@@ -11,11 +11,7 @@ const moment = require('moment');
  */
 const checks = {
     // For Sign In and Sign Up
-    checkName: check('name')
-        .not()
-        .trim()
-        .isEmpty()
-        .withMessage('Name is required.'),
+    checkName: check('name').trim().isEmpty().withMessage('Name is required.'),
     checkUserName: check('userName')
         .trim()
         .isLength({ min: 5 })
@@ -117,7 +113,9 @@ const returnErrors = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({
-            error: errors.array()[0].msg,
+            error: {
+                message: errors.array()[0].msg,
+            },
         });
     }
     next();
