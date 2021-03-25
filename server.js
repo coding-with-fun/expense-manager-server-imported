@@ -33,17 +33,18 @@ app.use(cookieParser());
 // app.use(cors());
 
 app.use((req, res, next) => {
-    const allowedOrigins = [
-        'http://127.0.0.1:8020',
-        'http://localhost:8020',
-        'http://127.0.0.1:9000',
-        'http://localhost:9000',
-        'http://localhost:3000',
-    ];
+    // const allowedOrigins = [
+    //     'http://127.0.0.1:8020',
+    //     'http://localhost:8020',
+    //     'http://127.0.0.1:9000',
+    //     'http://127.0.0.1:3000',
+    //     'http://localhost:9000',
+    //     'http://localhost:3000',
+    // ];
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
+    // if (allowedOrigins.includes(origin)) {
+    // }
+    res.setHeader('Access-Control-Allow-Origin', origin);
     //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
     res.header(
         'Access-Control-Allow-Methods',
