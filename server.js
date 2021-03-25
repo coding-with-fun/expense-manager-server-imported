@@ -41,7 +41,7 @@ app.use((req, res, next) => {
     //     'http://localhost:9000',
     //     'http://localhost:3000',
     // ];
-    const origin = req.headers.origin;
+    const origin = req.headers;
     // if (allowedOrigins.includes(origin)) {
     // }
     res.setHeader('Access-Control-Allow-Origin', origin);
