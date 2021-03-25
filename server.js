@@ -41,10 +41,10 @@ app.use((req, res, next) => {
     //     'http://localhost:9000',
     //     'http://localhost:3000',
     // ];
-    const origin = req.headers;
+    // const origin = req.headers;
     // if (allowedOrigins.includes(origin)) {
     // }
-    res.setHeader('Access-Control-Allow-Origin', origin);
+    // res.setHeader('Access-Control-Allow-Origin', origin);
     //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
     res.header(
         'Access-Control-Allow-Methods',
