@@ -15,7 +15,8 @@ exports.authenticateToken = () => {
             algorithms: ['HS256'],
             userProperty: 'auth',
             getToken: function fromHeaderOrQuerystring(req) {
-                const token = req.header.authToken;
+                console.log('req :: ', req);
+                const token = req.headers.authToken;
                 if (token && token.split(' ')[0] === 'Bearer') {
                     return token.split(' ')[1];
                 }
