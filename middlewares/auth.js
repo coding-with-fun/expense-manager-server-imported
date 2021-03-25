@@ -18,6 +18,12 @@ exports.authenticateToken = () => {
                 console.log('req :: ', req);
                 const token = req.headers.authToken;
                 if (token && token.split(' ')[0] === 'Bearer') {
+                    console.log(
+                        'token :: ',
+                        token.split(' ')[1],
+                        'raw token :: ',
+                        token
+                    );
                     return token.split(' ')[1];
                 }
                 return null;
