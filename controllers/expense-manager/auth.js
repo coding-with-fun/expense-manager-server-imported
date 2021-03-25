@@ -6,7 +6,7 @@
 const jwt = require('jsonwebtoken');
 require('colors');
 
-const User = require('../models/user');
+const User = require('../../models/expense-manager/user');
 
 /**
  * @type        POST

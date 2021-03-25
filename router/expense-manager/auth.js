@@ -5,8 +5,8 @@
 
 const express = require('express');
 
-const { signup, signin } = require('../controllers/auth');
-const { validateSignUp, validateSignIn } = require('../middlewares/checkReq');
+const { signup, signin } = require('../../controllers/expense-manager/auth');
+const { validateSignUp, validateSignIn } = require('../../middlewares/checkReq');
 
 const router = express.Router();
 

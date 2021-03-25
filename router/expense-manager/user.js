@@ -9,8 +9,8 @@ const {
     userDetails,
     updateDetails,
     deleteUser,
-} = require('../controllers/user');
-const { authenticateToken } = require('../middlewares/auth');
+} = require('../../controllers/expense-manager/user');
+const { authenticateToken } = require('../../middlewares/auth');
 
 const router = express.Router();
 

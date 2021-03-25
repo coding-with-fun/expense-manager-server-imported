@@ -11,7 +11,11 @@ const moment = require('moment');
  */
 const checks = {
     // For Sign In and Sign Up
-    checkName: check('name').trim().isEmpty().withMessage('Name is required.'),
+    checkName: check('name')
+        .not()
+        .trim()
+        .isEmpty()
+        .withMessage('Name is required.'),
     checkUserName: check('userName')
         .trim()
         .isLength({ min: 5 })

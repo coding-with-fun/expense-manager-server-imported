@@ -5,9 +5,9 @@
 
 const express = require('express');
 
-const authRoutes = require('./auth');
-const userRoutes = require('./user');
-const transactionRoutes = require('./transaction');
+const authRoutes = require('./expense-manager/auth');
+const userRoutes = require('./expense-manager/user');
+const transactionRoutes = require('./expense-manager/transaction');
 
 const app = express();
 const BASE_URL = '/api';

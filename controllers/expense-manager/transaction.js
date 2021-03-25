@@ -5,8 +5,8 @@
 
 require('colors');
 
-const User = require('../models/user');
-const Transaction = require('../models/transaction');
+const User = require('../../models/expense-manager/user');
+const Transaction = require('../../models/expense-manager/transaction');
 
 /**
  * @type        GET

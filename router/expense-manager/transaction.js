@@ -10,9 +10,9 @@ const {
     addTransaction,
     deleteTransaction,
     updateTransaction,
-} = require('../controllers/transaction');
-const { authenticateToken } = require('../middlewares/auth');
-const { validateTransaction } = require('../middlewares/checkReq');
+} = require('../../controllers/expense-manager/transaction');
+const { authenticateToken } = require('../../middlewares/auth');
+const { validateTransaction } = require('../../middlewares/checkReq');
 
 const router = express.Router();
 
