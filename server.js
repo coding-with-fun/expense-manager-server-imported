@@ -30,35 +30,43 @@ const app = express();
  */
 app.use(bodyParser.json());
 app.use(cookieParser());
-// app.use(cors({ credentials: true, origin: process.env.FRONT_END_URL }));
+const allowedOrigins = [
+    'http://127.0.0.1:8020',
+    'http://localhost:8020',
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+];
+const origin = req.headers.origin;
+if (allowedOrigins.includes(origin) || origin.includes('expense-manager-'))
+    app.use(cors({ credentials: true, origin: origin }));
 
-app.use((req, res, next) => {
-    const allowedOrigins = [
-        'http://127.0.0.1:8020',
-        'http://localhost:8020',
-        'http://127.0.0.1:3000',
-        'http://localhost:3000',
-    ];
-    const origin = req.headers.origin;
-    if (
-        allowedOrigins.includes(origin) ||
-        origin.includes('expense-manager-')
-    ) {
-        console.log('CORS', origin);
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
-    res.header(
-        'Access-Control-Allow-Methods',
-        'GET, OPTIONS, POST, PUT, DELETE'
-    );
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Content-Type, Authorization, x-auth-token'
-    );
-    res.header('Access-Control-Allow-Credentials', true);
-    return next();
-});
+// app.use((req, res, next) => {
+//     const allowedOrigins = [
+//         'http://127.0.0.1:8020',
+//         'http://localhost:8020',
+//         'http://127.0.0.1:3000',
+//         'http://localhost:3000',
+//     ];
+//     const origin = req.headers.origin;
+//     if (
+//         allowedOrigins.includes(origin) ||
+//         origin.includes('expense-manager-')
+//     ) {
+//         console.log('CORS', origin);
+//         res.setHeader('Access-Control-Allow-Origin', origin);
+//     }
+//     //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
+//     res.header(
+//         'Access-Control-Allow-Methods',
+//         'GET, OPTIONS, POST, PUT, DELETE'
+//     );
+//     res.header(
+//         'Access-Control-Allow-Headers',
+//         'Content-Type, Authorization, x-auth-token'
+//     );
+//     res.header('Access-Control-Allow-Credentials', true);
+//     return next();
+// });
 
 /**
  *  @description Establishing Server Connection.
