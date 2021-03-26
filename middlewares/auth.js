@@ -15,15 +15,9 @@ exports.authenticateToken = () => {
             algorithms: ['HS256'],
             userProperty: 'auth',
             getToken: function fromHeaderOrQuerystring(req) {
+                console.log(req.cookies.token, 'cookie token');
                 const token = req.header('x-auth-token');
-                console.log('req :: ', req, 'token :: ', token);
                 if (token && token.split(' ')[0] === 'Bearer') {
-                    console.log(
-                        'token :: ',
-                        token.split(' ')[1],
-                        'raw token :: ',
-                        token
-                    );
                     return token.split(' ')[1];
                 }
                 return null;
