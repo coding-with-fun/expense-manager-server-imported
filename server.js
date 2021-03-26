@@ -31,26 +31,26 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-    const allowedOrigins = [
-        'http://127.0.0.1:8020',
-        'http://localhost:8020',
-        'http://127.0.0.1:3000',
-        'http://localhost:3000',
-    ];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin) || origin.includes('expense-manager-'))
-        app.use(cors({ credentials: true, origin: origin }));
+const allowedDomains = ['http://127.0.0.1:3000', 'http://localhost:3000'];
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            // bypass the requests with no origin (like curl requests, mobile apps, etc )
+            if (!origin) return callback(null, true);
 
-    return next();
-});
+            if (
+                allowedDomains.indexOf(origin) === -1 ||
+                origin.includes('expense-manager-')
+            ) {
+                var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        },
+    })
+);
 // app.use((req, res, next) => {
-//     const allowedOrigins = [
-//         'http://127.0.0.1:8020',
-//         'http://localhost:8020',
-//         'http://127.0.0.1:3000',
-//         'http://localhost:3000',
-//     ];
+//     const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000'];
 //     const origin = req.headers.origin;
 //     if (
 //         allowedOrigins.includes(origin) ||
