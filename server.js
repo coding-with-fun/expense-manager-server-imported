@@ -41,7 +41,7 @@ app.use(
 
             if (
                 allowedDomains.indexOf(origin) !== -1 ||
-                origin.includes('expense-manager-')
+                origin.includes('coderc')
             ) {
                 return callback(null, true);
             }
