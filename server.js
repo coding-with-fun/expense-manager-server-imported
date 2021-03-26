@@ -41,7 +41,10 @@ app.use((req, res, next) => {
         'https://expense-manager-dtw5tn0jb-coderc.vercel.app',
     ];
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
+    if (
+        allowedOrigins.includes(origin) ||
+        origin.includes('expense-manager-')
+    ) {
         console.log('CORS', origin);
         res.setHeader('Access-Control-Allow-Origin', origin);
     }
