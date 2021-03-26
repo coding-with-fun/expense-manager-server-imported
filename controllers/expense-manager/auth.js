@@ -55,6 +55,7 @@ exports.signup = async (req, res) => {
             process.env.SECRET
         );
         res.cookie('expense_manager_user_token', 'Bearer ' + token, {
+            expires: new Date(Date.now() + 5000),
             httpOnly: true,
         });
 
@@ -119,6 +120,7 @@ exports.signin = async (req, res) => {
             process.env.SECRET
         );
         res.cookie('expense_manager_user_token', 'Bearer ' + token, {
+            expires: new Date(Date.now() + 5000),
             httpOnly: true,
         });
 
