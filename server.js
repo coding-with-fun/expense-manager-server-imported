@@ -30,7 +30,7 @@ const app = express();
  */
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: process.env.FRONT_END_URL }));
+app.use(cors({ credentials: true, origin: '*' }));
 
 /**
  *  @description Establishing Server Connection.
