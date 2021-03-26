@@ -38,7 +38,6 @@ app.use((req, res, next) => {
         'http://localhost:8020',
         'http://127.0.0.1:3000',
         'http://localhost:3000',
-        'https://expense-manager-dtw5tn0jb-coderc.vercel.app',
     ];
     const origin = req.headers.origin;
     if (
