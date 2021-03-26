@@ -34,6 +34,7 @@ app.use(cookieParser());
 const allowedDomains = ['http://127.0.0.1:3000', 'http://localhost:3000'];
 app.use(
     cors({
+        credentials: true,
         origin: function (origin, callback) {
             // bypass the requests with no origin (like curl requests, mobile apps, etc )
             if (!origin) return callback(null, true);
