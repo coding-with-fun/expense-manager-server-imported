@@ -8,6 +8,13 @@ require('colors');
 
 const User = require('../../models/expense-manager/user');
 
+const options = {
+    maxAge: 999999999999999,
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true,
+};
+
 /**
  * @type        POST
  * @route       /api/auth/signup
@@ -54,11 +61,7 @@ exports.signup = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('expense_manager_user_token', 'Bearer ' + token, {
-            httpOnly: true,
-            sameSite: 'none',
-            secure: true,
-        });
+        res.cookie('expense_manager_user_token', 'Bearer ' + token, options);
 
         return res.status(200).json({
             success: {
@@ -120,11 +123,7 @@ exports.signin = async (req, res) => {
             },
             process.env.SECRET
         );
-        res.cookie('expense_manager_user_token', 'Bearer ' + token, {
-            httpOnly: process.env.NODE_ENV === 'dev',
-            sameSite: 'none',
-            secure: true,
-        });
+        res.cookie('expense_manager_user_token', 'Bearer ' + token, options);
 
         return res.status(200).json({
             success: {
