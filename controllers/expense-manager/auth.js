@@ -57,6 +57,7 @@ exports.signup = async (req, res) => {
         res.cookie('expense_manager_user_token', 'Bearer ' + token, {
             httpOnly: true,
             sameSite: 'none',
+            secure: true,
         });
 
         return res.status(200).json({
@@ -122,6 +123,7 @@ exports.signin = async (req, res) => {
         res.cookie('expense_manager_user_token', 'Bearer ' + token, {
             httpOnly: true,
             sameSite: 'none',
+            secure: true,
         });
 
         return res.status(200).json({
