@@ -50,7 +50,10 @@ app.use((req, res, next) => {
     //     'Access-Control-Allow-Methods',
     //     'GET, OPTIONS, POST, PUT, DELETE'
     // );
-    // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization, x-auth-token'
+    );
     res.header('Access-Control-Allow-Credentials', true);
     return next();
 });
