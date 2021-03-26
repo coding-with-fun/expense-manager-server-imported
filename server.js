@@ -7,7 +7,7 @@
  * @description Package dependencies.
  */
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const express = require('express');
 require('colors');
@@ -29,7 +29,7 @@ const app = express();
  * @description Configuring middleware.
  */
 app.use(bodyParser.json());
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(cors({ credentials: true, origin: process.env.FRONT_END_URL }));
 
 /**
