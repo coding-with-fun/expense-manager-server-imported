@@ -30,16 +30,20 @@ const app = express();
  */
 app.use(bodyParser.json());
 app.use(cookieParser());
-const allowedOrigins = [
-    'http://127.0.0.1:8020',
-    'http://localhost:8020',
-    'http://127.0.0.1:3000',
-    'http://localhost:3000',
-];
-const origin = req.headers.origin;
-if (allowedOrigins.includes(origin) || origin.includes('expense-manager-'))
-    app.use(cors({ credentials: true, origin: origin }));
 
+app.use((req, res, next) => {
+    const allowedOrigins = [
+        'http://127.0.0.1:8020',
+        'http://localhost:8020',
+        'http://127.0.0.1:3000',
+        'http://localhost:3000',
+    ];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin) || origin.includes('expense-manager-'))
+        app.use(cors({ credentials: true, origin: origin }));
+
+    return next();
+});
 // app.use((req, res, next) => {
 //     const allowedOrigins = [
 //         'http://127.0.0.1:8020',
