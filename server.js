@@ -39,6 +39,7 @@ app.use(
             // bypass the requests with no origin (like curl requests, mobile apps, etc )
             if (!origin) return callback(null, true);
 
+            console.log(origin.includes('expense-manager-'), 'TEST ORIGIN');
             if (
                 allowedDomains.indexOf(origin) !== -1 ||
                 origin.includes('expense-manager-')
