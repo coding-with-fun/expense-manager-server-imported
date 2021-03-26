@@ -11,6 +11,8 @@ const User = require('../../models/expense-manager/user');
 const options = {
     maxAge: 999999999999999,
     httpOnly: true,
+    sameSite: 'none',
+    secure: true,
 };
 
 /**
