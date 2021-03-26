@@ -121,7 +121,7 @@ exports.signin = async (req, res) => {
             process.env.SECRET
         );
         res.cookie('expense_manager_user_token', 'Bearer ' + token, {
-            httpOnly: true,
+            httpOnly: process.env.NODE_ENV === 'dev',
             sameSite: 'none',
             secure: true,
         });
